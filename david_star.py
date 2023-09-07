@@ -1,84 +1,98 @@
 
-def count (x):
-    y = 0
-    for i in range(0,x+1):
-        if(i % 2 != 0):
-            y=y+1
-    return y
+def count(x):
+    # Calculate the center as (x + 1) // 2
+    return (x + 1) // 2
+
+
+    
+
+            
+
+
 
  
 
-def lowertriangle(x):
-    for i in range(5,0,-2):
+def lowertriangle(x,type):
+
+    row = 0
+    if(type==0):
+        row = 5
+
+    elif(type==1):
+        row = 7
+
+
+    for i in range(row,0,-2):
         n = x-i
         y = int(n/2)
         for j in range (0,y):
-            print(" ",end=" ")
+            print(" ",end="  ")
         for star in range(0,i):
-            print("*",end=" ")
+            print("*",end="  ")
         
         for j in range (0,y):
-            print(" ",end=" ")
+            print(" ",end="  ")
         print("\n")
 
 
-def lowershape(x,limit):
+
+
+def lowershape(x,limit,type):
     n = x
     for i in range (limit,0,-1):
         n = n + 2
         for v in range(1,i):
-            print(" ",end=" ")
+            print(" ",end="  ")
         for j in range(0,n):
-            print("*",end=" ")
+            print("*",end="  ")
         for v in range(1,i):
-            print(" ",end=" ")
+            print(" ",end="  ")
         print("\n")
-    lowertriangle(n)
+    lowertriangle(n,type)
         
 
 
-def uppershape(x,limit,lower):
+def uppershape(x,limit,type):
     n = x
     for i in range(0,limit):
         for v in range(1,i+1):
-            print(" ",end=" ")
+            print(" ",end="  ")
         for j in range(0,n):
-            print("*",end=" ")
+            print("*",end="  ")
         for v in range(1,i+1):
-            print(" ",end=" ")
+            print(" ",end="  ")
         n = n-2
         print("\n")
-    if(lower == 1):
-        lowerimit = limit - 1
-    elif(lower == 0):
-        lowerimit = limit
-
-    lowershape(n + 2,lowerimit)
+    lowershape(n + 2,limit-1,type)
 
 
 
-def uppertriangle(x,limit):
+def uppertriangle(x,limit,type):
+
+    row = 0
+    if(type==0):
+        row = 3
+
+    elif(type==1):
+        row = 4
+    
     n = x
-    upper=0
-    lower = 0
-    for i in range(0,3):
+    for i in range(0,row):
         n = n-1
         y = n/2
         for j in range (0,n):
             if(j==y):
                 for star in range(i,3*i+1):
-                    print("*",end=" ")
-            print(" ",end=" ")
+                    print("*",end="  ")
+            print(" ",end="  ")
         n = n-1
         print("\n")
-    if(limit % 2 == 0):
-        upper = int(limit / 2)
-        lower = 0
-    else:
-        upper = int(limit/2)+1
-        lower = 1
+    
+    upper = int(limit/2)+1
+    uppershape(x,upper,type)
 
-    uppershape(x,upper,lower)
+
+        
         
         
 
@@ -87,13 +101,31 @@ def uppertriangle(x,limit):
 x = int(input("Enter star number:"))
 
 
-center =  count(x)
-center =  center -3
+center =  count(x) 
+type = 0
+mid = 0
+print(center)
+if(center % 2 == 0):
+    type=0
+    mid = int(center-3)
+
+elif(center % 2 != 0):
+    type=1
+    mid = int(center-4)
 
 
-# upper = int(center/2) + 1
-# print(upper)
-uppertriangle(x,int(center))
+    
+print(type)   
+
+
+print(mid)
+uppertriangle(int(x),mid,type)
+
+
+
+
+
+
 
 
              
